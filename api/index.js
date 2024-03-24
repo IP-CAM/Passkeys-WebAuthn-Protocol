@@ -85,7 +85,7 @@ app.post('/login/start', (req, res) => {
             id: users[username].credentialID,
             transports: ['internal'],
         }],
-        userVerification: 'discouraged',
+        userVerification: 'preferred',
     });
 });
 
@@ -102,7 +102,8 @@ app.post('/login/finish', async (req, res) => {
             response: req.body.data,
             authenticator: getSavedAuthenticatorData(user),
             expectedRPID: rpId,
-            expectedOrigin
+            expectedOrigin,
+            requireUserVerification: false
         });
     } catch (error) {
         console.error(error);
